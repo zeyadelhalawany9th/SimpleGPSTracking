@@ -173,4 +173,43 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteX="1dp" />
 
+    <TextView
+        android:id="@+id/tv_labelWayPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="47dp"
+        android:text="Way Points"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_labelsensor" />
+
+    <TextView
+        android:id="@+id/tv_wayPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="48dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/tv_labelWayPoints"
+        app:layout_constraintTop_toBottomOf="@+id/tv_sensor" />
+
+    <Button
+        android:id="@+id/newWayPointBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Save a New Way Point"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_labelWayPoints" />
+
+    <Button
+        android:id="@+id/wayPointsListBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Way Points List"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newWayPointBtn" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

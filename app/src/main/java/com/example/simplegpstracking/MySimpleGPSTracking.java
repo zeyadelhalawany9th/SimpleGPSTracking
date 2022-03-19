@@ -9,6 +9,15 @@ import java.util.List;
 public class MySimpleGPSTracking extends Application {
 
     private static MySimpleGPSTracking mySimpleGPSTracking;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        mySimpleGPSTracking = this;
+        locationList = new ArrayList<>();
+    }
+
     private List<Location> locationList;
 
 
@@ -26,10 +35,5 @@ public class MySimpleGPSTracking extends Application {
         return mySimpleGPSTracking;
     }
 
-    public void OnCreate()
-    {
-        super.onCreate();
-        mySimpleGPSTracking = this;
-        locationList = new ArrayList<>();
-    }
+
 }

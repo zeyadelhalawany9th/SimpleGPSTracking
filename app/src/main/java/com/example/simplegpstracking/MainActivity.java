@@ -12,6 +12,7 @@ import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,21 +24,30 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final int DEFAULT_INTERVEL_SETTING = 30;
     public static final int FASTEST_INTERVAL_SETTING = 5;
+
     TextView latitudeLabel, latitudeValue, longitudeLabel, longitudeValue, altitudeLabel,
     altitudeValue, accuracyLabel, accuracyValue, speedLabel, speedValue, sensorLabel,
-    sensorValue, updatesLabel, updatesValue, addressLabel, addressValue;
+    sensorValue, updatesLabel, updatesValue, addressLabel, addressValue, wayPointsLabel, wayPointsValue;
+
+
+    Button newWayPointBtn, wayPointsListBtn;
 
     Switch locationUpdates, gps;
 
     View divider;
 
     boolean updateBtn = false;
+
+    Location currentLocation;
+
+    List<Location> savedLocations;
 
     LocationCallback locationCallback;
 
@@ -84,6 +94,13 @@ public class MainActivity extends AppCompatActivity {
 
         divider = findViewById(R.id.divider);
 
+        wayPointsLabel = findViewById(R.id.tv_labelWayPoints);
+        wayPointsValue = findViewById(R.id.tv_wayPoints);
+
+        newWayPointBtn = findViewById(R.id.newWayPointBtn);
+        wayPointsListBtn = findViewById(R.id.wayPointsListBtn);
+
+
         // initializing the LocationRequest class instance and its properties
         locationRequest = LocationRequest.create();
 
@@ -103,6 +120,21 @@ public class MainActivity extends AppCompatActivity {
                 updateUIValues(location);
             }
         };
+
+        newWayPointBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // get the current location and add it in the saved locations list
+
+                MySimpleGPSTracking mySimpleGPSTracking = (MySimpleGPSTracking) getApplicationContext();
+
+                savedLocations = mySimpleGPSTracking.getLocationList();
+
+                savedLocations.add(currentLocation);
+
+            }
+        });
 
 
         gps.setOnClickListener(new View.OnClickListener() {
@@ -226,6 +258,8 @@ public class MainActivity extends AppCompatActivity {
                     // setting the UI elements with their obtained values
                     updateUIValues(location);
 
+                    currentLocation = location;
+
                 }
             });
 
@@ -289,5 +323,15 @@ public class MainActivity extends AppCompatActivity {
         {
             addressValue.setText("Not available");
         }
+
+
+        MySimpleGPSTracking mySimpleGPSTracking = (MySimpleGPSTracking) getApplicationContext();
+
+        savedLocations = mySimpleGPSTracking.getLocationList();
+
+        wayPointsValue.setText(String.valueOf(savedLocations.size()));
+
+
+
     }
 }
