@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     sensorValue, updatesLabel, updatesValue, addressLabel, addressValue, wayPointsLabel, wayPointsValue;
 
 
-    Button newWayPointBtn, wayPointsListBtn;
+    Button newWayPointBtn, wayPointsListBtn, showMapBtn;
 
     Switch locationUpdates, gps;
 
@@ -100,6 +101,8 @@ public class MainActivity extends AppCompatActivity {
         newWayPointBtn = findViewById(R.id.newWayPointBtn);
         wayPointsListBtn = findViewById(R.id.wayPointsListBtn);
 
+        showMapBtn = findViewById(R.id.showMapBtn);
+
 
         // initializing the LocationRequest class instance and its properties
         locationRequest = LocationRequest.create();
@@ -133,6 +136,25 @@ public class MainActivity extends AppCompatActivity {
 
                 savedLocations.add(currentLocation);
 
+            }
+        });
+
+        wayPointsListBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MainActivity.this, ShowSavedLocationsList.class);
+                startActivity(intent);
+            }
+        });
+
+
+        showMapBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MainActivity.this, ShowMap.class);
+                startActivity(intent);
             }
         });
 
